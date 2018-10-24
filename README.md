@@ -1,0 +1,70 @@
+# MDR, a markdown runner
+
+## Hello World
+let's write our first litterate progam.
+
+### Define program structure
+``` hello_world.c
+@{{Includes}}
+
+int main(int argc, char** argv) {
+  @{{Print}}
+}
+```
+
+### Add Headers
+As we ll later call the puts function, we need **stdio** headers.
+``` Includes
+#include <stdio.h>
+```
+
+### Print function
+``` Print
+puts("Hello World");
+```
+
+### Compile
+with this line `@exec cc hello_world.c -o hello_world`
+@exec cc hello_world.c -o hello_world
+
+
+we compile hello_world.
+
+### Test
+
+Then we run it `@exec ./hello_world`
+
+### Check
+Let's look at hello_world.c `@exec cat hello_world.c`
+@exec cat hello_world.c
+
+### More test
+Let's try `@exec [ "$(./hello_world)" = "Hello World" ] && echo "OK" || echo "NOT_OK"`
+@exec [ "$(./hello_world)" = "Hello World" ] && echo "OK" || echo "NOT_OK"
+
+
+## TLDR ;-)
+  * when writing code block, use file or block name
+  * add result of a command with @exec whatever command here
+    (has to be on beginning of line)
+
+## Building
+``` sh
+make
+# or even only
+make test
+```
+If this does not work, you're probably missing (f)lex, either install it,
+check the 'generated' branch or file an issue
+
+## Todo
+  [ ] hand-written parsers
+
+@{{Test}}
+
+``` Test
+## Added
+```
+
+@{{AddUndefined}}
+

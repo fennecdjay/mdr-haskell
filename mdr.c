@@ -7,8 +7,8 @@
 
 #define MDR_MAX 80
 #define MDR_CHR '@'
-#define INC_INI "{{"
-#define INC_END "}}"
+#define INC_INI "[["
+#define INC_END "]]"
 #define BLK_STR "```"
 #define EXE_STR "exec"
 

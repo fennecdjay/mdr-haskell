@@ -5,10 +5,10 @@ let's write our first litterate progam.
 
 ### Define program structure
 @``` hello_world.c
-@{{Includes}}
+@[[Includes]]
 
 int main(int argc, char** argv) {
-  @{{Print}}
+  @[[Print]]
 }
 @```
 
@@ -63,7 +63,7 @@ check the 'generated' branch or file an issue
   * [ ] test suite
   * [ ] threading
 
-@{{Test}}
+@[[Test]]
 
 @``` Test
 ## Added

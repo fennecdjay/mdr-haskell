@@ -5,10 +5,10 @@ let's write our first litterate progam.
 
 ### Define program structure
 ```  hello_world.c
-@{{Includes}}
+@[[Includes]]
 
 int main(int argc, char** argv) {
-  @{{Print}}
+  @[[Print]]
 }
 ```
 

@@ -80,8 +80,3 @@ check the 'generated' branch or file an issue
 ```  Test
 ## Added
 ```
-
-@AddUndefined
-
-${{2NotAnId}}
-${{WrongEnd}

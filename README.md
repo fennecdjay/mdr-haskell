@@ -60,7 +60,6 @@ OK
 ## TLDR ;-)
   * when writing code block, use file or block name
   * add result of a command with @exec whatever command here
-    (has to be on beginning of line)
 
 ## Building
 ``` sh
@@ -72,7 +71,10 @@ If this does not work, you're probably missing (f)lex, either install it,
 check the 'generated' branch or file an issue
 
 ## Todo
-  [ ] hand-written parsers
+  * [x] hand-written parsers
+  * [ ] Fix include string
+  * [ ] test suite
+  * [ ] threading
 
 ## Added
 

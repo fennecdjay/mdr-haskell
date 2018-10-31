@@ -1,0 +1,16 @@
+component_depth: 3
+
+languages:
+  - name: cpp
+    production:
+      include:
+        - mdr.c
+
+  - name: go
+    production:
+      include:
+       - fake_entry
+    test:
+      include:
+        - .*\.mdr
+        - /tests/.*/.*\.mdr

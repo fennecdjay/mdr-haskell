@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <inttypes.h>
-#include <ctype.h>
 #include <string.h>
 
 #define MDR_MAX 80
@@ -22,25 +21,25 @@ static const char prefix[] = "```\n";
 static const char suffix[] = "\n```";
 
 typedef struct {
-  char*       name;
-  FILE*       file;
-  char*       fptr;
+  char       *name;
+  FILE       *file;
+  char       *fptr;
   size_t      size;
   unsigned    type : 1;
 } Block;
 
 typedef struct {
-  Block*       data;
-  Block*       curr;
-  const char*  name;
+  Block       *data;
+  Block       *curr;
+  const char  *name;
   uint8_t      used;
 } Blocks;
 
 typedef struct Lex {
-  FILE* fio[2];
+  FILE *fio[2];
   Blocks *blocks;
-  char* buf;
-  struct Lex* base;
+  char *buf;
+  struct Lex *base;
   uint8_t len;
   char chr;
   unsigned alt : 1;
@@ -62,7 +61,7 @@ static int block_init(Block *block, const char *name, const int type) {
   return MDR_SUCCESS;
 }
 
-static FILE* block_add(Blocks* blocks, const char *name, const int type) {
+static FILE *block_add(Blocks *blocks, const char *name, const int type) {
   if(blocks->curr)
     return blocks->curr->file;
   Block *block = &blocks->data[blocks->used];
@@ -83,19 +82,19 @@ static void free_blocks(const Blocks *blocks) {
   }
 }
 
-static FILE* block_open_in(Blocks *blocks) {
+static FILE *block_open_in(Blocks *blocks) {
   if(blocks->curr) {
-    FILE* file = blocks->curr->file;
+    FILE *file = blocks->curr->file;
     rewind(file);
     return file;
   }
   return fopen(blocks->name, "r");
 }
 
-static FILE* block_open_out(const Blocks *blocks) {
+static FILE *block_open_out(const Blocks *blocks) {
   if(blocks->curr)
     return fopen(blocks->curr->name, "w");
-  const char* name = blocks->name;
+  const char *name = blocks->name;
   const size_t len = strlen(name);
   char c[len];
   strcpy(c, name);
@@ -120,26 +119,26 @@ static inline int lex_chr(const Lex *lex, const char c) {
   return lex->chr == c;
 }
 
-static inline int lex_eat(Lex* lex) {
+static inline int lex_eat(Lex *lex) {
   return
     ((lex->chr = (lex->buf[lex->len++] = fgetc(lex->fio[0]))) != EOF) &&
     lex->len < MDR_MAX;
 }
 
-static inline void lex_clean(Lex* lex) {
+static inline void lex_clean(Lex *lex) {
 //  memset(lex->buf, 0, lex->len);
   memset(lex->buf, 0, MDR_MAX);
   lex->len = 0;
 }
 
-static inline void lex_start(Lex* lex) {
+static inline void lex_start(Lex *lex) {
 //  memset(lex->buf, 0, lex->len);
   memset(lex->buf, 0, MDR_MAX);
   lex->buf[0] = lex->chr;
   lex->len = 1;
 }
 
-static int lex_id(Lex* lex) {
+static int lex_id(Lex *lex) {
   if(!isidini(lex->chr))
     return MDR_FAILURE;
   lex_start(lex);
@@ -151,14 +150,14 @@ static int lex_id(Lex* lex) {
   return MDR_SUCCESS;
 }
 
-static int lex_ispath(const char c, int * id) {
+static int lex_ispath(const char c, int *id) {
   if(!ispath(c))
     return MDR_FAILURE;
   *id = 1;
   return MDR_SUCCESS;
 }
 
-static int lex_path(Lex* lex, int *is_path) {
+static int lex_path(Lex *lex, int *is_path) {
   while(lex_eat(lex) && lex_chr(lex, ' '));
   lex_start(lex);
   if(!(isidini(lex->chr) || lex_ispath(lex->chr, is_path)))
@@ -182,8 +181,8 @@ static void dec(FILE *restrict from, FILE *restrict to) {
   fputs(suffix, to);
 }
 
-static void lex_exec(const Lex* lex) {
-  FILE* file = popen(lex->buf, "r");
+static void lex_exec(const Lex *lex) {
+  FILE *file = popen(lex->buf, "r");
   if(!file)
     return;
   if(lex->dec)
@@ -193,16 +192,16 @@ static void lex_exec(const Lex* lex) {
   fclose(file);
 }
 
-static void lex_line(Lex* lex) {
+static void lex_line(Lex *lex) {
   lex_clean(lex);
   while(!lex_chr(lex, '\n') && lex_eat(lex));
 }
 
-static int lex_block(const Lex* lex, const int trim) {
+static int lex_block(const Lex *lex, const int trim) {
   Blocks *blocks = lex->blocks;
   lex->buf[lex->len - trim] = '\0';
   for(int8_t i = 0; i < blocks->used; i++) {
-    Block * const block = &blocks->data[i];
+    Block *const block = &blocks->data[i];
     if(!strcmp(lex->buf, block->name)) {
       blocks->curr = block;
       return MDR_SUCCESS;
@@ -211,7 +210,7 @@ static int lex_block(const Lex* lex, const int trim) {
   return MDR_FAILURE;
 }
 
-static int lex_string(Lex* lex, const char* str) {
+static int lex_string(Lex *lex, const char *str) {
   if(!lex_chr(lex, str[0]))
     return MDR_FAILURE;
   const size_t len = strlen(str);
@@ -227,36 +226,31 @@ static inline void lex_putc(Lex *lex, const char c) {
   fputc(c, lex->fio[1]);
 }
 
-static inline void lex_puts(Lex* lex, const char* c) {
+static inline void lex_puts(Lex *lex, const char *c) {
   fputs(c, lex->fio[1]);
 }
 
-static inline void lex_put_chr(Lex* lex) {
+static inline void lex_put_chr(Lex *lex) {
   fputc(lex->chr, lex->fio[1]);
 }
 
-static inline void lex_put_buf(Lex* lex) {
+static inline void lex_put_buf(Lex *lex) {
   fputs(lex->buf, lex->fio[1]);
   lex_clean(lex);
 }
 
-static void lex_init(Lex* lex, char* c, const lex_opt opt) {
+static void lex_init(Lex *lex, char *c, const lex_opt opt) {
   memset(c, 0, MDR_MAX);
-  lex->len = 0;
   lex->buf = c;
-  lex->alt = 0;
   lex->act = ((opt & MDR_RUN) == MDR_RUN);
   lex->dec = ((opt & MDR_DEC) == MDR_DEC);
 }
 
-static inline int lex_alt(Lex* lex) { return lex->alt; }
-static inline int lex_alt_toggle(Lex* lex) { return (lex->alt = !lex->alt); }
-
-static inline int lex_cmp(Lex* lex, const char *s) {
+static inline int lex_cmp(Lex *lex, const char *s) {
   return strncmp(lex->buf, s, strlen(s));
 }
 
-static int lex_open(Lex* lex, Lex * const base) {
+static int lex_open(Lex *lex, Lex *const base) {
   lex->base = base;
   if(!(lex->fio[0] = block_open_in(lex->blocks)))
     return MDR_ERROR;
@@ -271,9 +265,9 @@ static int lex_open(Lex* lex, Lex * const base) {
   return MDR_SUCCESS;
 }
 
-static int cmd(Lex*);
+static int cmd(Lex *);
 
-static void lex_close(Lex* lex) {
+static void lex_close(Lex *lex) {
   if(lex->dec) {
     fclose(lex->fio[0]);
     fclose(lex->fio[1]);
@@ -283,12 +277,12 @@ static void lex_close(Lex* lex) {
     fclose(lex->fio[1]);
 }
 
-static int lex_run(Lex* lex) {
+static int lex_run(Lex *lex) {
   while(lex_eat(lex)) {
     if(lex_chr(lex, MDR_CHR))
       MDR(cmd(lex))
-    else if(lex->act || lex_alt(lex))
-      lex_put_chr(lex);
+      else if(lex->act || lex->alt)
+        lex_put_chr(lex);
     lex->len = 0;
   }
   lex_close(lex);
@@ -296,7 +290,7 @@ static int lex_run(Lex* lex) {
 }
 
 
-static int tangle(Lex* base) {
+static int tangle(Lex *base) {
   char buf[MDR_MAX];
   Lex lex = { .blocks=base->blocks };
   lex_init(&lex, buf, MDR_RUN);
@@ -306,13 +300,13 @@ static int tangle(Lex* base) {
   return ret;
 }
 
-static int inc_run(Lex* lex) {
+static int inc_run(Lex *lex) {
   if(lex_block(lex, 2))
     return tangle(lex);
   return MDR_FAILURE;
 }
 
-static int inc(Lex* lex) {
+static int inc(Lex *lex) {
   if(!lex_string(lex, INC_INI))
     return MDR_FAILURE;
   if(!lex_eat(lex))
@@ -324,7 +318,7 @@ static int inc(Lex* lex) {
   return MDR_FAILURE;
 }
 
-static void ini(Lex* lex) {
+static void ini(Lex *lex) {
   int is_path = 0;
   if(lex_path(lex, &is_path)) {
     lex_block(lex, 1);
@@ -332,12 +326,12 @@ static void ini(Lex* lex) {
   }
 }
 
-static int blk(Lex* lex) {
+static int blk(Lex *lex) {
   if(!lex_string(lex, BLK_STR))
     return MDR_FAILURE;
   if(lex->act)
     lex_puts(lex, BLK_STR);
-  if(!lex_alt_toggle(lex))
+  if(!(lex->alt = !lex->alt))
     return MDR_SUCCESS;
   if(!lex->act)
     ini(lex);
@@ -349,8 +343,8 @@ static int blk(Lex* lex) {
   return MDR_SUCCESS;
 }
 
-static int exe(Lex* lex) {
-  if(!lex_id(lex) || lex_cmp(lex, EXE_STR) || lex_alt(lex)) {
+static int exe(Lex *lex) {
+  if(!lex_id(lex) || lex_cmp(lex, EXE_STR) || lex->alt) {
     if(!lex->act)
       lex->fio[1] = NULL;
     return MDR_FAILURE;
@@ -361,9 +355,9 @@ static int exe(Lex* lex) {
   return MDR_SUCCESS;
 }
 
-static int opt(Lex* lex) {
+static int opt(Lex *lex) {
   int ret;
-  if(!lex_alt(lex)) {
+  if(!lex->alt) {
     if((ret = lex_chr(lex, MDR_CHR))) {
       if(lex->dec)
         lex_put_chr(lex);
@@ -377,15 +371,15 @@ static int opt(Lex* lex) {
   return MDR_FAILURE;
 }
 
-static int cmd_fail(Lex* lex) {
-  if(lex->act || lex_alt(lex)) {
+static int cmd_fail(Lex *lex) {
+  if(lex->act || lex->alt) {
     lex_putc(lex, MDR_CHR);
     lex_put_buf(lex);
   }
   return MDR_FAILURE;
 }
 
-static int cmd(Lex* lex) {
+static int cmd(Lex *lex) {
   int ret;
   lex_clean(lex);
   if(!lex_eat(lex))
@@ -397,7 +391,7 @@ static int cmd(Lex* lex) {
   return cmd_fail(lex);
 }
 
-static int mdr_tangle(Blocks* blocks) {
+static int mdr_tangle(Blocks *blocks) {
   char buf[MDR_MAX];
   Lex lex = { .blocks=blocks };
   lex_init(&lex, buf, MDR_RUN);
@@ -429,7 +423,7 @@ static int mdr(const char *name) {
   return MDR_SUCCESS;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   for(int i = 1; i < argc; ++i)
     MDR(mdr(argv[i]));
   return 0;

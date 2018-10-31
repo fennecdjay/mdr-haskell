@@ -5,10 +5,10 @@ let's write our first litterate progam.
 
 ### Define program structure
 ```  hello_world.c
-@[[Includes]]
+@[Includes]]
 
 int main(int argc, char** argv) {
-  @[[Print]]
+  @[Print]]
 }
 ```
 
@@ -41,12 +41,10 @@ Hello World
 ### Check
 Let's look at hello_world.c @exec cat hello_world.c
 ```
-#include <stdio.h>
-
+@Includes]]
 
 int main(int argc, char** argv) {
-  puts("Hello World");
-
+  @Print]]
 }
 
 ```

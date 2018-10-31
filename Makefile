@@ -15,6 +15,6 @@ mdr_debug: mdr.g
 	${CC} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
 
 clean:
-	rm -rf mdr mdr_debug hello_world.c hello_world mdr.o mdr.g tests/*.mdr
+	rm -rf mdr mdr_debug hello_world.c hello_world mdr.o mdr.g tests/*.md
 
 .SUFFIXES: .c .o .g

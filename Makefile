@@ -14,13 +14,7 @@ mdr_debug: mdr.g
 .c.g:
 	${CC} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
 
-test: mdr
-	./mdr README.mdr test/*.mdr
-
-vg_test: mdr_debug
-	valgrind ./mdr_debug README.mdr tests/*.mdr
-
 clean:
-	rm -r mdr mdr_debug hello_world.c hello_world mdr.o mdr.g test/*.mdr
+	rm -rf mdr mdr_debug hello_world.c hello_world mdr.o mdr.g tests/*.mdr
 
 .SUFFIXES: .c .o .g

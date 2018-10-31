@@ -119,10 +119,6 @@ static inline int lex_chr(const Lex *lex, const char c) {
   return lex->chr == c;
 }
 
-static inline int lex_eat0(Lex *lex) {
-  return (lex->chr = fgetc(lex->fio[0])) != EOF;
-}
-
 static inline int lex_eat(Lex *lex) {
   return
     ((lex->chr = (lex->buf[lex->len++] = fgetc(lex->fio[0]))) != EOF) &&
@@ -162,7 +158,7 @@ static int lex_ispath(const char c, int *id) {
 }
 
 static int lex_path(Lex *lex, int *is_path) {
-  while(lex_eat0(lex) && lex_chr(lex, ' '));
+  while(lex_eat(lex) && lex_chr(lex, ' '));
   lex_start(lex);
   if(!(isidini(lex->chr) || lex_ispath(lex->chr, is_path)))
     return MDR_FAILURE;
@@ -240,6 +236,7 @@ static inline void lex_put_chr(Lex *lex) {
 
 static inline void lex_put_buf(Lex *lex) {
   fputs(lex->buf, lex->fio[1]);
+  lex_clean(lex);
 }
 
 static void lex_init(Lex *lex, char *c, const lex_opt opt) {
@@ -281,7 +278,7 @@ static void lex_close(Lex *lex) {
 }
 
 static int lex_run(Lex *lex) {
-  while(lex_eat0(lex)) {
+  while(lex_eat(lex)) {
     if(lex_chr(lex, MDR_CHR))
       MDR(cmd(lex))
       else if(lex->act || lex->alt)
@@ -312,7 +309,7 @@ static int inc_run(Lex *lex) {
 static int inc(Lex *lex) {
   if(!lex_string(lex, INC_INI))
     return MDR_FAILURE;
-  if(!lex_eat0(lex))
+  if(!lex_eat(lex))
     return MDR_ERROR;
   if(!lex_id(lex) || !lex_string(lex, INC_END))
     return MDR_FAILURE;
@@ -385,7 +382,7 @@ static int cmd_fail(Lex *lex) {
 static int cmd(Lex *lex) {
   int ret;
   lex_clean(lex);
-  if(!lex_eat(lex)) // !!! with not zero ?
+  if(!lex_eat(lex))
     return MDR_ERROR;
   if((ret = opt(lex)))
     return ret;

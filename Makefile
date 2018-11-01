@@ -10,7 +10,7 @@ mdr_debug: src/mdr.g
 	${CC} ${LDFLAGS} -o $@ $^
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o $(<:.c=.o) -O3 -flto
+	${CC} ${CFLAGS} -c $< -o $(<:.c=.o) -O3
 
 .c.g:
 	${CC} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g

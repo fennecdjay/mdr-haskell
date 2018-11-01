@@ -62,6 +62,7 @@ make
   * [x] hand-written parsers
   * [x] Fix include string
   * [x] Handle file extension
+  * [x] remove block extra line
   * [ ] short for file when declaring file block
   * [ ] test suite
-  * [ ] threading
+  * [x] threading

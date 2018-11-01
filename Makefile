@@ -1,11 +1,12 @@
-CFLAGS += -Wall -Wextra -Wpedantic -I.
+CFLAGS += -Wall -Wextra -Wpedantic -I. -g
+LDFLAGS += -lpthread
 STRIP ?= strip
 
 mdr: src/mdr.o
 	${CC} ${LDFLAGS} -o $@ $^ -flto
 	${STRIP} $^
 
-mdr_debug: mdr.g
+mdr_debug: src/mdr.g
 	${CC} ${LDFLAGS} -o $@ $^
 
 .c.o:

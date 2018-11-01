@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <pthread.h>
 #include <inttypes.h>
 #include <string.h>
 
@@ -419,9 +420,15 @@ static int mdr_run(Blocks *const blocks, const enum lex_opt opt) {
   return lex_run(&lex);
 }
 
+typedef struct {
+  char** argv;
+  int argc;
+  pthread_mutex_t mutex;
+} Mdr;
+
 static int mdr(const char *name) {
-  Block  data[MDR_MAX];
-  Blocks blocks = { .data=data, .name = name };
+  Block  block[MDR_MAX];
+  Blocks blocks = { .data=block, .name = name };
   MDR(mdr_run(&blocks, MDR_PRE))
   MDR(mdr_tangle(&blocks))
   MDR(mdr_run(&blocks, MDR_RUN | MDR_DEC))
@@ -429,8 +436,31 @@ static int mdr(const char *name) {
   return MDR_SUCCESS;
 }
 
+static void* mdr_process(void* data) {
+  Mdr *m = (Mdr*)data;
+  while(1) {
+    pthread_mutex_lock(&m->mutex);
+    const char *name = *m->argv++;
+    --m->argc;
+    pthread_mutex_unlock(&m->mutex);
+    if(m->argc <= 0 || !name)
+      return NULL;
+    if(mdr(name) == MDR_ERROR)
+      return NULL;
+  }
+  return NULL;
+}
+
+#define NTHREAD 2
 int main(int argc, char **argv) {
-  for(int i = 1; i < argc; ++i)
-    MDR(mdr(argv[i]));
+  pthread_t thread[NTHREAD];
+  if(argc < 2)return 1;
+  Mdr m = { .argv=++argv, .argc=argc };
+  pthread_mutex_init(&m.mutex, NULL);
+  for(int i = 0; i < NTHREAD; ++i)
+    pthread_create(&thread[i], NULL, mdr_process, &m);
+  for(int i = 0; i < NTHREAD; ++i)
+    pthread_join(thread[i], NULL);
+  pthread_mutex_destroy(&m.mutex);
   return 0;
 }

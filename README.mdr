@@ -56,4 +56,4 @@ make
   * [x] remove block extra line
   * [ ] short for file when declaring file block
   * [ ] test suite
-  * [ ] threading
+  * [x] threading

@@ -2,6 +2,9 @@ component_depth: 1
 
 languages:
   - name: cpp
+    production:
+      include:
+        - /src/.*\.c
 
   - name: go
     production:

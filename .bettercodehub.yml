@@ -4,7 +4,7 @@ languages:
   - name: cpp
     production:
       include:
-        - /src/.*\.c
+        /src/.*\.c
 
   - name: go
     production:

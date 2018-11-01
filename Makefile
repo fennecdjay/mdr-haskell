@@ -1,4 +1,4 @@
-CFLAGS += -Wall -Wextra -Wpedantic -I. -g
+CFLAGS += -I. -g
 LDFLAGS += -lpthread
 STRIP ?= strip
 

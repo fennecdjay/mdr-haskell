@@ -4,13 +4,4 @@ languages:
   - name: cpp
     production:
       include:
-        /src/.*\.c
-
-  - name: go
-    production:
-      include:
-       - fake_entry
-    test:
-      include:
-        - .*\.mdr
-        - /tests/.*/.*\.mdr
+      - /src/.*\.c

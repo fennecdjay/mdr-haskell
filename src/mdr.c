@@ -18,7 +18,7 @@
 
 #define MDR(a) { if((a) == MDR_ERROR) return MDR_ERROR; }
 
-static const char prefix[] = "result:" BLK_STR "\n";
+static const char prefix[] = BLK_STR "\n";
 static const char suffix[] = "\n" BLK_STR;
 
 typedef struct {

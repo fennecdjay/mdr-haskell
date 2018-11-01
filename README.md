@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 ```
 
 ### Add Headers
-As we ll later call the puts function, we need **stdio** headers.
+As we need the *puts* function, we need **stdio** headers.
 ``` .c
 #include <stdio.h>
 ```
@@ -24,7 +24,7 @@ puts("Hello World");
 ```
 
 ### Compile
-with this line @exec cc hello_world.c -o hello_world  
+with this line @exec cc hello_world.c -o hello_world
 
 ```
 ```
@@ -33,13 +33,13 @@ we compile hello_world.
 
 ### Test
 
-Then we run it @exec ./hello_world  
+Then we run it @exec ./hello_world
 
 ```
 Hello World
 ```
 ### Check
-Let's look at hello_world.c @exec cat hello_world.c  
+Let's look at hello_world.c @exec cat hello_world.c
 ```
 #include <stdio.h>
 
@@ -65,6 +65,9 @@ make
   * [x] Fix include string
   * [x] Handle file extension
   * [x] remove block extra line
-  * [ ] short for file when declaring file block
+  * [ ] short for filetype when declaring file block
+  * [ ] exec might need more info (filetype, command)
   * [ ] test suite
   * [x] threading
+
+generated from [this file](https://github.com/fennecdjay/mdr/blob/master/README.mdr)

@@ -1,10 +1,8 @@
 CFLAGS += -I. -g -std=c99
 LDFLAGS += -lpthread -pthread
-STRIP ?= strip
 
 mdr: src/mdr.o
 	${CC} ${LDFLAGS} -o $@ $^
-	${STRIP} $^
 
 mdr_debug: src/mdr.g
 	${CC} ${LDFLAGS} -o $@ $^

@@ -4,4 +4,5 @@ languages:
   - name: java
     production:
       - /src/mdr.c
+      - src/mdr.c
       - .*/src/mdr.c

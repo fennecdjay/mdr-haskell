@@ -2,9 +2,6 @@ component_depth: 1
 
 languages:
   - name: cpp
-    production:
-      include:
-        - mdr.c
 
   - name: go
     production:

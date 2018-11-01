@@ -3,7 +3,7 @@ LDFLAGS += -lpthread -pthread
 STRIP ?= strip
 
 mdr: src/mdr.o
-	${CC} ${LDFLAGS} -o $@ $^ -flto
+	${CC} ${LDFLAGS} -o $@ $^
 	${STRIP} $^
 
 mdr_debug: src/mdr.g

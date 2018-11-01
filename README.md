@@ -24,33 +24,33 @@ puts("Hello World");
 ```
 
 ### Compile
-with this line @exec cc hello_world.c -o hello_world
-result:```
+with this line @exec cc hello_world.c -o hello_world  
+result:```    
 ```
 
 we compile hello_world.
 
 ### Test
 
-Then we run it @exec ./hello_world
-result:```
-Hello World
+Then we run it @exec ./hello_world  
+result:```  
+Hello World  
 ```
 ### Check
-Let's look at hello_world.c @exec cat hello_world.c
-result:```
+Let's look at hello_world.c @exec cat hello_world.c  
+result:```  
 #include <stdio.h>
 
 
 int main(int argc, char** argv) {
   puts("Hello World");
 
-}
+}  
 ```
 ### More test
 Let's try @exec [ "$(./hello_world)" = "Hello World" ] && echo "OK" || echo "NOT_OK"
-result:```
-OK
+result:```  
+OK  
 ```
 
 ## Building

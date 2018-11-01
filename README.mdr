@@ -24,7 +24,7 @@ puts("Hello World");
 @```
 
 ### Compile
-with this line @@exec cc hello_world.c -o hello_world
+with this line @@exec cc hello_world.c -o hello_world  
 @exec cc hello_world.c -o hello_world
 
 
@@ -32,11 +32,11 @@ we compile hello_world.
 
 ### Test
 
-Then we run it @@exec ./hello_world
+Then we run it @@exec ./hello_world  
 @exec ./hello_world
 
 ### Check
-Let's look at hello_world.c @@exec cat hello_world.c
+Let's look at hello_world.c @@exec cat hello_world.c  
 @exec cat hello_world.c
 
 ### More test

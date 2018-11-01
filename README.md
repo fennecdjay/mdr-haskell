@@ -68,6 +68,7 @@ make
 ## Todo
   * [x] hand-written parsers
   * [x] Fix include string
-  * [ ] Handle file extension
+  * [x] Handle file extension
+  * [ ] short for file when declaring file block
   * [ ] test suite
   * [ ] threading

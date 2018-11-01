@@ -4,7 +4,7 @@
 let's write our first litterate progam.
 
 ### Define program structure
-@``` hello_world.c
+@``` hello_world.c .c
 @[[Includes]]
 
 int main(int argc, char** argv) {
@@ -14,12 +14,12 @@ int main(int argc, char** argv) {
 
 ### Add Headers
 As we ll later call the puts function, we need **stdio** headers.
-@``` Includes
+@``` Includes .c
 #include <stdio.h>
 @```
 
 ### Print function
-@``` Print
+@``` Print .c
 puts("Hello World");
 @```
 

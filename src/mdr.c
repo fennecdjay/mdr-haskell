@@ -333,12 +333,16 @@ static int blk(Lex *lex) {
     lex_puts(lex, BLK_STR);
   if(!(lex->alt = !lex->alt))
     return MDR_SUCCESS;
-  if(!lex->act)
+  if(!lex->act) {
     ini(lex);
-  lex_line(lex);
-  if(lex->act) {
-    lex_putc(lex, ' ');
+    lex_line(lex);
+  } else {
+    int is_path; // TODO: error checking
+    lex_path(lex, &is_path);
+    lex_clean(lex);
+    lex_line(lex);
     lex_put_buf(lex);
+    lex_putc(lex, '\n');
   }
   return MDR_SUCCESS;
 }

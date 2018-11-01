@@ -17,8 +17,8 @@
 
 #define MDR(a) { if((a) == MDR_ERROR) return MDR_ERROR; }
 
-static const char prefix[] = "```\n";
-static const char suffix[] = "\n```";
+static const char prefix[] = "result:" BLK_STR "\n";
+static const char suffix[] = "\n" BLK_STR;
 
 typedef struct {
   char       *name;
@@ -173,6 +173,8 @@ static void dump(FILE *restrict from, FILE *restrict to) {
   char ch;
   while((ch = fgetc(from)) != EOF)
     putc(ch, to);
+// rewind
+  fseek(to, -1, SEEK_CUR);
 }
 
 static void dec(FILE *restrict from, FILE *restrict to) {
@@ -341,8 +343,8 @@ static int blk(Lex *lex) {
     lex_path(lex, &is_path);
     lex_clean(lex);
     lex_line(lex);
+    lex_putc(lex, ' ');
     lex_put_buf(lex);
-    lex_putc(lex, '\n');
   }
   return MDR_SUCCESS;
 }

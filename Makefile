@@ -1,5 +1,5 @@
 CFLAGS += -I. -g -std=c99
-LDFLAGS += -lpthread
+LDFLAGS += -lpthread -pthread
 STRIP ?= strip
 
 mdr: src/mdr.o

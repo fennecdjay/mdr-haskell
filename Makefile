@@ -13,6 +13,10 @@ mdr_debug: src/mdr.g
 .c.g:
 	${CC} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
 
+test: mdr
+	./mdr test/*.mdr || exit 0
+	./mdr README.mdr
+
 clean:
 	rm -rf mdr mdr_debug hello_world.c hello_world src/*.o src/*.g tests/*.md
 

@@ -1,4 +1,4 @@
-CFLAGS += -I. -g
+CFLAGS += -I. -g -std=c99
 LDFLAGS += -lpthread
 STRIP ?= strip
 

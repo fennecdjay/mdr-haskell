@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/fennecdjay/mdr/badge.svg)](https://coveralls.io/github/fennecdjay/mdr)
 # MDR, a markdown runner
 
 mdr is a small (less than 500 C SLOC) program and markup

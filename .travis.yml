@@ -3,9 +3,14 @@ language: c
 os:
   - linux
   - osx
+  - window
 
 compiler:
   - gcc
   - clang
 
 script: make && make test
+
+allow_failures:
+  - os: window
+

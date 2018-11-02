@@ -347,6 +347,7 @@ static int blk(Lex *lex) {
     lex_line(lex);
     lex_putc(lex, ' ');
     lex_put_buf(lex);
+    lex_putc(lex, '\n');
   }
   return MDR_SUCCESS;
 }

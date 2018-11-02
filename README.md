@@ -1,10 +1,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/fennecdjay/mdr/badge.svg)](https://coveralls.io/github/fennecdjay/mdr)
 # MDR, a markdown runner
 
-mdr is a small (less than 500 C SLOC) program and markup
-designed to facilitate documentation and testing.
+mdr is a small (less than 500 C SLOC) program and markup  
+It is designed to facilitate documentation and testing.  
 I started it to ease [Gwion](https://github.com/fennecdjay/gwion)'s devellopment,
-but it is not tied in any way to this project.
+but it is not tied in any way to this project.  
 Let' walktrough... :smile:
 ## Hello World
 let's write our first litterate progam.

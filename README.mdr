@@ -42,7 +42,8 @@ Yes, there should be no output, and that good news.
 Then we run it @@exec ./hello_world
 
 @exec ./hello_world
-Do we Read *Hello World!*?
+
+Do we read *Hello World!*?  
 Assuming yes, let's continue.
 
 ### Check

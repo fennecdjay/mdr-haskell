@@ -11,6 +11,7 @@ let's write our first litterate progam.
 
 ### Define program structure
 ``` .c
+
 @[[Includes]]
 
 int main(int argc, char** argv) {
@@ -21,11 +22,13 @@ int main(int argc, char** argv) {
 ### Add Headers
 As we need the *puts* function, we need **stdio** headers.
 ``` .c
+
 #include <stdio.h>
 ```
 
 ### Print function
 ``` .c
+
 puts("Hello World!");
 ```
 
@@ -43,7 +46,8 @@ Then we run it @exec ./hello_world
 
 ```
 Hello World!
-```Do we Read *Hello World!*?
+```
+Do we Read *Hello World!*?  
 Assuming yes, let's continue.
 
 ### Check

@@ -1,8 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/fennecdjay/mdr/badge.svg)](https://coveralls.io/github/fennecdjay/mdr)
 # MDR, a markdown runner
 
-mdr is a small (less than 500 C SLOC :champagne:) program and markup designed to
-facilitate documentation and testing.  
+mdr is a **small** (less than **500 C SLOC** :champagne:) *program* and *markup*
+designed to facilitate documentation and testing.  
 I started it to ease [Gwion](https://github.com/fennecdjay/gwion)'s devellopment,
 but it is not tied in any way to this project.  
 Let' walktrough... :smile:
@@ -38,7 +38,7 @@ with this line @exec cc hello_world.c -o hello_world
 ```
 ```
 
-we compile hello_world.  
+we compile *hello_world.c*.  
 Yes, there should be no output, and that good news.
 ### Test
 
@@ -47,7 +47,7 @@ Then we run it @exec ./hello_world
 ```
 Hello World!
 ```
-Do we Read *Hello World!*?  
+Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
@@ -64,9 +64,9 @@ int main(int argc, char** argv) {
 That's the content of the source file we generated (and compiled).
 
 ### More test
-Let's try @exec [ "$(./hello_world)" = "Hello World" ] && echo "OK" || echo "NOT_OK"
+Let's try @exec [ "$(./hello_world)" = "Hello World!" ] && echo "OK" || echo "NOT_OK"
 ```
-NOT_OK
+OK
 ```
 
 ## Building

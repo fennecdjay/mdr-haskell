@@ -1,6 +1,6 @@
 CFLAGS += -I. -g -std=c99
 LDFLAGS += -lpthread -pthread
-
+PREFIX ?= /usr/local
 ifeq (${USE_COVERAGE}, 1)
 CFLAGS += -ftest-coverage -fprofile-arcs
 LDFLAGS += --coverage
@@ -21,6 +21,11 @@ mdr_debug: src/mdr.g
 test: mdr
 	./mdr test/*.mdr || exit 0
 	./mdr README.mdr
+
+install: mdr
+	cp -f mdr ${DESTDIR}${PREFIX}/bin
+	chmod 755 ${DESTDIR}${PREFIX}/bin/mdr
+
 
 clean:
 	rm -rf mdr mdr_debug hello_world.c hello_world src/*.o src/*.g tests/*.md

@@ -1,6 +1,11 @@
 CFLAGS += -I. -g -std=c99
 LDFLAGS += -lpthread -pthread
 
+ifeq (${USE_COVERAGE}, 1)
+CFLAGS += -ftest-coverage -fprofile-arcs
+LDFLAGS += --coverage
+endif
+
 mdr: src/mdr.o
 	${CC} ${LDFLAGS} -o $@ $^
 

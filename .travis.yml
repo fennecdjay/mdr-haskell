@@ -9,6 +9,13 @@ compiler:
   - gcc
   - clang
 
+addons:
+  apt:
+    packages:
+#    - valgrind
+    - lcov
+
+
 script: make && make test
 
 #allow_failures:
@@ -20,4 +27,5 @@ install:
 
 after_success:
   - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then lcov --no-external --capture --directory src --output-file mdr.info; fi
+  - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then ls; fi
   - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then coveralls-lcov mdr.info; fi

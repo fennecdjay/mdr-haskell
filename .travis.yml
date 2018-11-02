@@ -19,5 +19,5 @@ install:
   - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then export USE_COVERAGE=1; fi
 
 after_success:
-  - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then lcov --no-external --capture --directory src --output-file mdr.info fi
-  - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then genhtml -q -s -t "Mdr: coverage" -o lcov --precision 2 $OUTFILE
+  - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then lcov --no-external --capture --directory src --output-file mdr.info; fi
+  - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then genhtml -q -s -t "Mdr: coverage" -o lcov --precision 2 mdr.info; fi

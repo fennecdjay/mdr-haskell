@@ -172,9 +172,9 @@ static int lex_path(Lex *lex, int *is_path) {
 }
 
 static void dump(FILE *restrict from, FILE *restrict to) {
-  char ch;
+  int ch;
   while((ch = fgetc(from)) != EOF)
-    putc(ch, to);
+    putc((char)ch, to);
 // rewind
   fseek(to, -1, SEEK_CUR);
 }
@@ -365,9 +365,9 @@ static int exe(Lex *lex) {
 }
 
 static int opt(Lex *lex) {
-  int ret;
   if(!lex->alt) {
-    if((ret = lex_chr(lex, MDR_CHR))) {
+    int ret = lex_chr(lex, MDR_CHR);
+    if(ret) {
       if(lex->dec)
         lex_put_chr(lex);
       return ret;

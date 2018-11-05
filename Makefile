@@ -3,6 +3,7 @@ LDFLAGS += -lpthread -pthread
 PREFIX ?= /usr/local
 ifeq (${USE_COVERAGE}, 1)
 CFLAGS += -ftest-coverage -fprofile-arcs
+CFLAGS += -Wall -Wextra
 LDFLAGS += --coverage
 endif
 

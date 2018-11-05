@@ -1,7 +1,7 @@
 component_depth: 1
 
 languages:
-  - name: java
+  - name: cpp
     production:
       - /src/mdr.c
       - src/mdr.c

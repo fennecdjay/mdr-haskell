@@ -4,7 +4,7 @@ languages:
   - name: cpp
     production:
       include:
-      - .*/.*.c
+      - .*/.*\.c
    - test:
      include:
        *.mdr

@@ -1,3 +1,4 @@
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/fennecdjay/mdr.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/fennecdjay/mdr/context:cpp)
 [![Coverage Status](https://coveralls.io/repos/github/fennecdjay/mdr/badge.svg)](https://coveralls.io/github/fennecdjay/mdr)
 # MDR, a markdown runner
 

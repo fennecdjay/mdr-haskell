@@ -286,7 +286,7 @@ static int lex_run(Lex *lex) {
   while(lex_eat(lex)) {
     if(lex_chr(lex, MDR_CHR))
       MDR(cmd(lex))
-      else if(lex->act || lex->alt)
+      else if(lex->fio[1] && (lex->act || lex->alt))
         lex_put_chr(lex);
     lex->len = 0;
   }

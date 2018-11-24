@@ -1,3 +1,4 @@
+#define _XOPEN_SOURCE   500
 #define _POSIX_C_SOURCE 200809L
 #include <stdlib.h>
 #include <stdio.h>
@@ -447,8 +448,12 @@ static void* mdr_process(void* data) {
     pthread_mutex_unlock(&m->mutex);
     if(m->argc <= 0 || !name)
       return NULL;
-    if(mdr(name) == MDR_ERROR)
-      return NULL;
+    char* real = realpath(name, NULL);
+    const int ret = mdr(real);
+    free(real);
+    if(ret == MDR_ERROR) {
+      break;
+    }
   }
   return NULL;
 }

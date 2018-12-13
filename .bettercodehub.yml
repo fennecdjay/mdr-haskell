@@ -1,10 +1,12 @@
-component_depth: 1
+component_depth: 2
 
 languages:
   - name: cpp
     production:
       include:
       - /src/.*\.c
+
+  - name: go
     test:
       include:
         *.mdr

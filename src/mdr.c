@@ -181,9 +181,9 @@ static void dump(FILE *restrict from, FILE *restrict to) {
 }
 
 static void dec(FILE *restrict from, FILE *restrict to) {
-  fputs(prefix, to);
+//  fputs(prefix, to);
   dump(from, to);
-  fputs(suffix, to);
+//  fputs(suffix, to);
 }
 
 static void lex_exec(const Lex *lex) {

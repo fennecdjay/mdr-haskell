@@ -35,25 +35,20 @@ puts("Hello World!");
 
 ### Compile
 with this line @exec cc hello_world.c -o hello_world
-
-```
-```
+``````
 
 we compile *hello_world.c*.  
 Yes, there should be no output, and that good news.
 ### Test
 
 Then we run it @exec ./hello_world
-
 ```
-Hello World!
-```
+Hello World!```
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
 Let's look at hello_world.c @exec cat hello_world.c
-```
 #include <stdio.h>
 
 
@@ -61,14 +56,11 @@ int main(int argc, char** argv) {
   puts("Hello World!");
 
 }
-```
 That's the content of the source file we generated (and compiled).
 
 ### More test
 Let's try @exec [ "$(./hello_world)" = "Hello World!" ] && echo "OK" || echo "NOT_OK"
-```
 OK
-```
 
 ## Building
 ``` sh

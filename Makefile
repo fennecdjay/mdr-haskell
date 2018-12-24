@@ -1,4 +1,4 @@
-CFLAGS += -I. -g -std=c99
+CFLAGS += -I. -g -std=c99 -Wall
 LDFLAGS += -lpthread -pthread
 PREFIX ?= /usr/local
 ifeq (${USE_COVERAGE}, 1)

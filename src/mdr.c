@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <inttypes.h>
 #include <string.h>
+#include <unistd.h>
 
 #define MDR_MAX 80
 #define MDR_CHR '@'
@@ -19,9 +20,6 @@
 #define MDR_ERROR    -1
 
 #define MDR(a) { if((a) == MDR_ERROR) return MDR_ERROR; }
-
-static const char prefix[] = BLK_STR "\n";
-static const char suffix[] = "\n" BLK_STR;
 
 typedef struct {
   char       *name;
@@ -160,8 +158,12 @@ static int lex_ispath(const char c, int *id) {
   return MDR_SUCCESS;
 }
 
+static inline void eat_space(Lex *lex) {
+  while(lex_eat(lex) && isspace(lex->buf[lex->len -1]));
+}
+
 static int lex_path(Lex *lex, int *is_path) {
-  while(lex_eat(lex) && lex_chr(lex, ' '));
+  eat_space(lex);
   lex_start(lex);
   if(!(isidini(lex->chr) || lex_ispath(lex->chr, is_path)))
     return MDR_FAILURE;
@@ -176,14 +178,7 @@ static void dump(FILE *restrict from, FILE *restrict to) {
   int ch;
   while((ch = fgetc(from)) != EOF)
     putc((char)ch, to);
-// rewind
   fseek(to, -1, SEEK_CUR);
-}
-
-static void dec(FILE *restrict from, FILE *restrict to) {
-//  fputs(prefix, to);
-  dump(from, to);
-//  fputs(suffix, to);
 }
 
 static void lex_exec(const Lex *lex) {
@@ -191,7 +186,7 @@ static void lex_exec(const Lex *lex) {
   if(!file)
     return;
   if(lex->dec)
-    dec(file, lex->fio[1]);
+    dump(file, lex->fio[1]);
   else
     dump(file, lex->fio[1]);
   fclose(file);
@@ -294,7 +289,6 @@ static int lex_run(Lex *lex) {
   return MDR_SUCCESS;
 }
 
-
 static int tangle(Lex *base) {
   char buf[MDR_MAX];
   Lex lex = { .blocks=base->blocks };
@@ -336,8 +330,14 @@ static int blk(Lex *lex) {
     return MDR_FAILURE;
   if(lex->act)
     lex_puts(lex, BLK_STR);
-  if(!(lex->alt = !lex->alt))
+  if(!(lex->alt = !lex->alt)) {
+    lex_line(lex);
+    eat_space(lex);
+    lex_clean(lex);
+    if(lex->buf)
+      return MDR_ERROR;
     return MDR_SUCCESS;
+  }
   if(!lex->act) {
     ini(lex);
     lex_line(lex);
@@ -439,6 +439,13 @@ static int mdr(const char *name) {
   return MDR_SUCCESS;
 }
 
+static int check_name(const char* name) {
+  const size_t len = strlen(name);
+  if(strcmp(name + len -4, ".mdr"))
+    return MDR_FAILURE;
+  return MDR_SUCCESS;
+}
+
 static void* mdr_process(void* data) {
   Mdr *m = (Mdr*)data;
   while(1) {
@@ -448,6 +455,8 @@ static void* mdr_process(void* data) {
     pthread_mutex_unlock(&m->mutex);
     if(m->argc <= 0 || !name)
       return NULL;
+    if(check_name(name) == MDR_FAILURE)
+      continue;
     char* real = realpath(name, NULL);
     const int ret = mdr(real);
     free(real);
@@ -458,15 +467,15 @@ static void* mdr_process(void* data) {
   return NULL;
 }
 
-#define NTHREAD 2
 int main(int argc, char **argv) {
-  pthread_t thread[NTHREAD];
+  long nthread = sysconf(_SC_NPROCESSORS_ONLN);
+  pthread_t thread[nthread];
   if(argc < 2)return 1;
   Mdr m = { .argv=++argv, .argc=argc };
   pthread_mutex_init(&m.mutex, NULL);
-  for(int i = 0; i < NTHREAD; ++i)
+  for(int i = 0; i < nthread; ++i)
     pthread_create(&thread[i], NULL, mdr_process, &m);
-  for(int i = 0; i < NTHREAD; ++i)
+  for(int i = 0; i < nthread; ++i)
     pthread_join(thread[i], NULL);
   pthread_mutex_destroy(&m.mutex);
   return 0;

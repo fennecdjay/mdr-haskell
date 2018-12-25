@@ -5,8 +5,9 @@ os:
   - osx
 #  - windows
 
-#matrix:
-#  allow_failures:
+matrix:
+  allow_failures:
+    - compiler: clang
 #   - os: osx
 #  - os: windows
              

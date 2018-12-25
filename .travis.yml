@@ -5,9 +5,10 @@ os:
   - osx
 #  - windows
 
-matrix:
-  allow_failures:
-   - os: osx
+#matrix:
+#  allow_failures:
+#   - os: osx
+#  - os: windows
              
 compiler:
   - gcc
@@ -23,7 +24,6 @@ addons:
 script: make && make test
 
 #allow_failures:
-#  - os: windows
 
 install:
   - if [ $TRAVIS_JOB_NUMBER = ${TRAVIS_BUILD_NUMBER}.1  ]; then gem install coveralls-lcov; fi

@@ -1,0 +1,21 @@
+@[[test]]
+
+@``` test.sh
+test
+@```
+
+@[[te]]
+@```test
+append to include
+@```
+
+
+@```test
+append to include
+@```
+
+@[[i
+
+@``` wont/write.that
+@[[te]]
+@```

@@ -1,27 +1,23 @@
 CFLAGS += -I. -g -std=c99 -Wall
 LDFLAGS += -lpthread -pthread
 PREFIX ?= /usr/local
-ifeq (${USE_COVERAGE}, 1)
-CFLAGS += -ftest-coverage -fprofile-arcs
+#ifeq (${USE_COVERAGE}, 1)
+COV_CFLAGS += -ftest-coverage -fprofile-arcs
 CFLAGS += -Wall -Wextra
-LDFLAGS += --coverage
-endif
+COV_LDFLAGS += --coverage
+#endif
 
 mdr: src/mdr.o
 	${CC} ${LDFLAGS} -o $@ $^
 
 mdr_debug: src/mdr.g
-	${CC} ${LDFLAGS} -o $@ $^
+	${CC}  ${COV_LDFLAGS} ${LDFLAGS} -o $@ $^
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $(<:.c=.o) -O3
 
 .c.g:
-	${CC} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
-
-test: mdr
-	./mdr test/*.mdr || exit 0
-	./mdr README.mdr
+	${CC} ${COV_CFLAGS} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
 
 install: mdr
 	cp -f mdr ${DESTDIR}${PREFIX}/bin
@@ -30,5 +26,8 @@ install: mdr
 
 clean:
 	rm -rf mdr mdr_debug hello_world.c hello_world src/*.o src/*.g tests/*.md
+
+test: mdr_debug
+	./mdr_debug **/*.mdr non_mdr_file
 
 .SUFFIXES: .c .o .g

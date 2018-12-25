@@ -159,7 +159,8 @@ static int lex_ispath(const char c, int *id) {
 }
 
 static inline void eat_space(Lex *lex) {
-  while(lex_eat(lex) && isspace(lex->buf[lex->len -1]));
+//  while(lex_eat(lex) && isspace(lex->buf[lex->len -1]));
+  while(lex_eat(lex) && lex_chr(lex, ' '));
 }
 
 static int lex_path(Lex *lex, int *is_path) {
@@ -185,10 +186,7 @@ static void lex_exec(const Lex *lex) {
   FILE *file = popen(lex->buf, "r");
   if(!file)
     return;
-  if(lex->dec)
-    dump(file, lex->fio[1]);
-  else
-    dump(file, lex->fio[1]);
+  dump(file, lex->fio[1]);
   fclose(file);
 }
 
@@ -333,9 +331,9 @@ static int blk(Lex *lex) {
   if(!(lex->alt = !lex->alt)) {
     lex_line(lex);
     eat_space(lex);
-    lex_clean(lex);
-    if(lex->buf)
+    if(!strlen(lex->buf))
       return MDR_ERROR;
+    lex_clean(lex);
     return MDR_SUCCESS;
   }
   if(!lex->act) {
@@ -468,7 +466,11 @@ static void* mdr_process(void* data) {
 }
 
 int main(int argc, char **argv) {
+#ifdef __linux__
   long nthread = sysconf(_SC_NPROCESSORS_ONLN);
+#else
+  long nthread = 2;
+#endif
   pthread_t thread[nthread];
   if(argc < 2)return 1;
   Mdr m = { .argv=++argv, .argc=argc };

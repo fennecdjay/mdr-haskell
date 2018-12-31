@@ -5,8 +5,12 @@ languages:
     production:
       include:
         - /src/.*\.c
+      exclude:
+        - fake/entry
 
   - name: go
     test:
       include:
         - *.mdr
+      exclude:
+        - *.md

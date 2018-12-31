@@ -31,6 +31,7 @@ puts("Hello World!");
 
 ### Compile
 with this line @exec cc hello_world.c -o hello_world
+
 we compile *hello_world.c*.  
 Yes, there should be no output, and that good news.
 ### Test
@@ -38,6 +39,8 @@ Yes, there should be no output, and that good news.
 Then we run it @exec ./hello_world
 ```
 Hello World!```
+
+
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 

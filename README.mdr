@@ -17,24 +17,25 @@ let's write our first litterate progam.
 int main(int argc, char** argv) {
   @[[Print]]
 }
-@```
+@```  
 
 ### Add Headers
 As we need the *puts* function, we need **stdio** headers.
 @``` Includes .c
 #include <stdio.h>
-@```
+@```  
 
 ### Print function
 @``` Print .c
 puts("Hello World!");
-@```
+@```  
+
+
 
 ### Compile
 with this line @@exec cc hello_world.c -o hello_world
-```
 @exec cc hello_world.c -o hello_world
-```
+
 
 we compile *hello_world.c*.  
 Yes, there should be no output, and that good news.
@@ -42,8 +43,10 @@ Yes, there should be no output, and that good news.
 
 Then we run it @@exec ./hello_world
 ```
-@exec ./hello_world
+@exec ./hello_world  
 ```
+
+
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
@@ -61,7 +64,7 @@ Let's try @@exec [ "$(./hello_world)" = "Hello World!" ] && echo "OK" || echo "N
 ## Building
 ``` sh
 make
-```
+```  
 
 ## Todo
   * [x] hand-written parsers

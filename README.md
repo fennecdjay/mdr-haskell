@@ -27,10 +27,10 @@ As we need the *puts* function, we need **stdio** headers.
 ``` .c
 
 puts("Hello World!");
-```### Compile
-with this line @exec cc hello_world.c -o hello_world
-``````
+```
 
+### Compile
+with this line @exec cc hello_world.c -o hello_world
 we compile *hello_world.c*.  
 Yes, there should be no output, and that good news.
 ### Test
@@ -59,7 +59,7 @@ OK
 ## Building
 ``` sh
 make
-```
+```  
 
 ## Todo
   * [x] hand-written parsers

@@ -1,33 +1,45 @@
-CFLAGS += -I. -g -std=c99 -Wall
-LDFLAGS += -lpthread -pthread
-PREFIX ?= /usr/local
-#ifeq (${USE_COVERAGE}, 1)
-COV_CFLAGS += -ftest-coverage -fprofile-arcs
-CFLAGS += -Wall -Wextra
-COV_LDFLAGS += --coverage
-#endif
+PRG     ?= mdr
+PREFIX  ?= /usr
+LEX      = alex
+YACC     = happy
+LFLAGS  += -g
+YFLAGS  += -a -g -c
+HSFLAGS += -dynamic --make -O2 -fprof-auto -fprof-cafs -Wall -Wextra
+HSFLAGS += -XLambdaCase
+HSFLAGS += -fwarn-identities -fwarn-incomplete-record-updates
+HSFLAGS += -fhpc
+#non exaustive pattern in alex
+#-fwarn-incomplete-uni-patterns
+#HSFLAGS += -fwarn-monomorphism-restriction -fwarn-incomplete-uni-patterns
+# because alex misse many signatures
+#HSFLAGS += -Wmissing-exported-signatures -Wmissing-local-signatures
+# just boring
+#HSFLAGS +=  -fwarn-implicit-prelude -fwarn-missing-import-lists
 
-mdr: src/mdr.o
-	${CC} ${LDFLAGS} -o $@ $^
+all: lexer.hs parser.hs
+	rm -f mdr.tix
+	ghc ${HSFLAGS} -o ${PRG} *.hs
 
-mdr_debug: src/mdr.g
-	${CC}  ${COV_LDFLAGS} ${LDFLAGS} -o $@ $^
+lexer.hs: lexer.x
+	${LEX} ${LFLAGS} $<
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o $(<:.c=.o) -O3
+parser.hs: parser.y
+	${YACC} ${YFLAGS} $<
 
-.c.g:
-	${CC} ${COV_CFLAGS} ${CFLAGS} -c $< -o $(<:.c=.g) -Og -g
-
-install: mdr
-	cp -f mdr ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/mdr
-
+test: ${PRG}
+	@echo "# Title" | ./${PRG} > /dev/null
+	@echo "# Title" | ./${PRG} -- > /dev/null
+	@./${PRG} $(wildcard tests/*.mdr)
 
 clean:
-	rm -rf mdr mdr_debug hello_world.c hello_world src/*.o src/*.g tests/*.md
+	rm -f lexer.hs
+	rm -f parser.hs
+	rm -f *.hi *.o
+	rm -f ${PRG}
+	rm -f hello_world.c hello_world
+	rm -f ${PRG}.tix *.html
+	rm -f $(wildcard tests/*.md)
+	rm -rf unwritable Just.sh
 
-test: mdr_debug
-	./mdr_debug **/*.mdr non_mdr_file
-
-.SUFFIXES: .c .o .g
+install:
+	install ${PRG} ${PREFIX}/bin/${PRG}

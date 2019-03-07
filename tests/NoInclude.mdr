@@ -1,0 +1,6 @@
+# Test no includes
+
+It could happen that we document something whithout 
+needing mdr's inclusion system.
+
+That's what we're doing rigth now

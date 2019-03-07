@@ -1,0 +1,10 @@
+# Testing includes in content
+
+first define said include:
+@``` include
+that' s my include
+@```
+
+and then call it
+
+@[[include]]

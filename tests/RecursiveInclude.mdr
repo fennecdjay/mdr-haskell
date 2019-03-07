@@ -1,0 +1,11 @@
+# Testing recursive includes
+
+As that would lead to infinite loop,
+it has to be forbidden.
+let's check
+
+@``` SomeInclude
+// let's tryto include SomeInclude,
+// leading to recutsivity
+@[[SomeInclude]]
+@```

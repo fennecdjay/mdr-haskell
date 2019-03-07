@@ -1,0 +1,18 @@
+# Testing file write errors
+
+just try to write where you can't:
+
+make some dir, make it unwritable
+@``` Just.sh
+@exec rm -rf unwritable
+@exec mkdir unwritable; chmod -w unwritable
+@@exec Just.sh
+@```
+
+try to write in it
+@``` unwritable/test.sh
+echo "Hello, World!"
+@```
+
+clean
+@exec rm -rf unwritable

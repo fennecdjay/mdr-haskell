@@ -1,5 +1,0 @@
-@exec echo lol
-
-@``` some_block.sh
-test
-@```

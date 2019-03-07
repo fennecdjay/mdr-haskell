@@ -19,11 +19,14 @@ int main(int argc, char** argv) {
 }
 @```  
 
+
 ### Add Headers
 As we need the *puts* function, we need **stdio** headers.
-@``` Includes .c
+
+@``` Includes .c  
 #include <stdio.h>
 @```  
+
 
 ### Print function
 @``` Print .c
@@ -42,17 +45,23 @@ Yes, there should be no output, and that good news.
 ### Test
 
 Then we run it @@exec ./hello_world
-```
+```  
 @exec ./hello_world  
-```
+
+```  
 
 
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
-Let's look at hello_world.c @@exec cat hello_world.c
+Let's look at hello_world.c @@exec cat hello_world.c  
+
+```
 @exec cat hello_world.c
+
+```
+
 
 That's the content of the source file we generated (and compiled).
 

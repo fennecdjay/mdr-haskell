@@ -18,12 +18,15 @@ let's write our first litterate progam.
 int main(int argc, char** argv) {
   @[[Print]]
 }
-```### Add Headers
+```
+### Add Headers
 As we need the *puts* function, we need **stdio** headers.
-``` .c
+
+``` .c  
 
 #include <stdio.h>
-```### Print function
+```
+### Print function
 ``` .c
 
 puts("Hello World!");
@@ -37,15 +40,18 @@ Yes, there should be no output, and that good news.
 ### Test
 
 Then we run it @exec ./hello_world
-```
-Hello World!```
+```  
+Hello World!
+```  
 
 
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
-Let's look at hello_world.c @exec cat hello_world.c
+Let's look at hello_world.c @exec cat hello_world.c  
+
+```
 #include <stdio.h>
 
 
@@ -53,6 +59,9 @@ int main(int argc, char** argv) {
   puts("Hello World!");
 
 }
+```
+
+
 That's the content of the source file we generated (and compiled).
 
 ### More test

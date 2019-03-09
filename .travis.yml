@@ -18,8 +18,11 @@ compiler:
 addons:
   apt:
     packages:
+     - alex
+     - happy
+     - ghc
 #    - valgrind
-    - lcov
+#    - lcov
 
 
 script: make && make test

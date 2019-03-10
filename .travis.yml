@@ -5,9 +5,6 @@ os:
   - osx
 #  - windows
 
-env:
-  - LEX="cabal run alex"
-  - YACC="cabal run happy"
 matrix:
   allow_failures:
     - compiler: clang
@@ -21,7 +18,7 @@ compiler:
 install:
   - cabal install alex happy
 
-script: make && make test
+script: LEX="cabal run alex" YACC="cabal run happy" make && make test
 
 #allow_failures:
 

@@ -1,7 +1,7 @@
 PRG     ?= mdr
 PREFIX  ?= /usr
-LEX      = alex
-YACC     = happy
+LEX     ?= alex
+YACC    ?= happy
 LFLAGS  += -g
 YFLAGS  += -a -g -c
 #HSFLAGS += -dynamic --make -O2 -fprof-auto -fprof-cafs -Wall -Wextra

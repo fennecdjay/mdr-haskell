@@ -5,6 +5,9 @@ os:
   - osx
 #  - windows
 
+env:
+  - LEX="cabal run alex"
+  - YACC="cabal run happy"
 matrix:
   allow_failures:
     - compiler: clang

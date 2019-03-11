@@ -18,7 +18,7 @@ compiler:
 install:
   - cabal install alex happy
 
-script: LEX="cabal run alex" YACC="cabal run happy" make && make test
+#script: LEX="cabal run alex" YACC="cabal run happy" make && make test
 
 #allow_failures:
 

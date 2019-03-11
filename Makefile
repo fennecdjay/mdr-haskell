@@ -22,10 +22,10 @@ all: lexer.hs parser.hs
 	ghc ${HSFLAGS} -o ${PRG} *.hs
 
 lexer.hs: lexer.x
-	${LEX} ${LFLAGS} $<
+	${LEX} ${LFLAGS} -o src/MdrLex $<
 
 parser.hs: parser.y
-	${YACC} ${YFLAGS} $<
+	${YACC} ${YFLAGS} -o src/MdrPars $<
 
 test: ${PRG}
 	@echo "# Title" | ./${PRG} > /dev/null

@@ -18,7 +18,7 @@ viewStmt' (x:xs) = addM (viewToken x) (viewStmt' xs)
 
 viewStmt :: [Snippet] -> [Token] -> MdrString
 viewStmt s x
-  | stmtSnip x || stmtFile x = Right $ addM (viewStmt' x) (return "```\n")
+  | stmtSnip x || stmtFile x = Right $ addM (viewStmt' x) (return "```  \n")
   | otherwise = codeStmt s x
 
 viewAst :: [Snippet] -> [[Token]] -> MdrString

@@ -17,7 +17,7 @@ let's write our first litterate progam.
 int main(int argc, char** argv) {
   @[[Print]]
 }
-```
+```  
 
 
 ### Add Headers
@@ -25,13 +25,13 @@ As we need the *puts* function, we need **stdio** headers.
 
 ``` Includes .c  
 #include <stdio.h>
-```
+```  
 
 
 ### Print function
 ``` Print .c
 puts("Hello, World!");
-```
+```  
 
 
 
@@ -79,4 +79,4 @@ OK
 make
 ```  
 
-generated from [this file](https://github.com/fennecdjay/mdr/blob/haskell/tests/README.mdr)
+generated from [this file](https://github.com/fennecdjay/mdr/blob/master/README.mdr)

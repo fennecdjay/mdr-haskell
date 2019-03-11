@@ -52,7 +52,7 @@ openGivenFile fp s = (Right <$> openFile fp s) `catch` (return . Left)
 
 execcmd :: String -> IO String
 execcmd cmd =
-  createProcess (proc "/usr/bin/sh" ("-c" : [cmd])) {std_out = CreatePipe} >>= \(_, Just hout, _, _) ->
+  createProcess (proc "sh" ("-c" : [cmd])) {std_out = CreatePipe} >>= \(_, Just hout, _, _) ->
     hGetContents hout
 
 mdrUsrErr :: Monad m => String -> m (Either IOError b)

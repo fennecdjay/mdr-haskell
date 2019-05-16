@@ -113,7 +113,7 @@ snipToken k (Include a b) =
     then knowIncludek k (Include a b)
     else Left $ "Snippet Does not exist: '" ++ initN (tailN a 3) 2 ++ "'" -- TODO pos
 snipToken k (ExecCmd a _) = Right $ newSnipToken k (execcmd a)
-snipToken k x = Right $ newSnipToken k (return $ tokStr x)
+snipToken k x = Right $ newSnipToken k (return $! tokStr x)
 
 addRet :: [Snippet] -> Snippet -> [Snippet]
 addRet a (b, c) = a ++ [(b, c)]

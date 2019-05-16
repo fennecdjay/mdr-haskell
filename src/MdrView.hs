@@ -8,8 +8,8 @@ import           MdrSnip (Snippet)
 import           MdrUtil
 
 viewToken :: Token -> IO String
-viewToken (ExecCmd a _) = return ("@exec " ++ a)
-viewToken x             = return $ tokStr x
+viewToken (ExecCmd a _) = return $! "@exec " ++ a
+viewToken x             = return $! tokStr x
 
 viewStmt' :: [Token] -> IO String
 viewStmt' []     = return []
@@ -18,7 +18,7 @@ viewStmt' (x:xs) = addM (viewToken x) (viewStmt' xs)
 
 viewStmt :: [Snippet] -> [Token] -> MdrString
 viewStmt s x
-  | stmtSnip x || stmtFile x = Right $ addM (viewStmt' x) (return "```  \n")
+  | stmtSnip x || stmtFile x = Right $ addM (viewStmt' x) (return "```")
   | otherwise = codeStmt s x
 
 viewAst :: [Snippet] -> [[Token]] -> MdrString

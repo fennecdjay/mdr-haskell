@@ -14,7 +14,7 @@ import           MdrUtil
 codeToken :: [Snippet] -> Token -> MdrString
 codeToken s (Include a _) = findSnipk' s a
 codeToken _ (ExecCmd a _) = Right $ execcmd a >>= evaluate
-codeToken _ x             = Right $ return $ tokStr x
+codeToken _ x             = Right $ return $! tokStr x
 
 codeStmt' :: IO String -> [Snippet] -> [Token] -> MdrString
 codeStmt' t s xs =
@@ -40,7 +40,7 @@ code2file s a =
     Left e  -> mdrUsrErr (tokErr (head $ tail a) e)
 
 codeAst :: [Snippet] -> [[Token]] -> IO (Either IOError ())
-codeAst _ [] = return $ pure ()
+codeAst _ [] = return $! pure ()
 codeAst s [x] = code2file s x
 codeAst s (x:xs) =
   code2file s x >>= \case

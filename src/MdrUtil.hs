@@ -56,7 +56,7 @@ execcmd cmd =
     hGetContents hout
 
 mdrUsrErr :: Monad m => String -> m (Either IOError b)
-mdrUsrErr a = return $ Left $ userError a
+mdrUsrErr a = return $! Left $! userError a
 
 mdrUsrOk :: Monad m => (a1 -> a2 -> m a) -> a1 -> m a2 -> m a
 mdrUsrOk f a b = join (liftM2 f (return a) b)

@@ -11,18 +11,19 @@ $space = [\ \t]   -- spaces
 @path      = [\. \/ $alpha $digit _]
 @filename  = @path*@id\.@id
 @toeol     = .* \n
+-- @blk       = @```$space*
 @blk       = @```$space*
 @exec      = \@exec$space*
 @patheol   = @filename@toeol
 
 tokens :-
   @blk@patheol  { mkL LFileIni }
-  @blk@id@toeol { mkL LCodeIni }
-  @blk \n       { mkL LCodeEnd }
+  @blk$space@id@toeol { mkL LCodeIni }
+  @blk          { mkL LCodeEnd }
   "@[["@id"]]"  { mkL LInclude }
   @exec@toeol   { mkL LExecCmd }
   "@@"          { mkL LSkip }
-  $white+|.     { mkL LContent }
+  $white+|.|\n     { mkL LContent }
 
 {
 tokId :: Token -> String
@@ -65,13 +66,13 @@ showPosn (AlexPn _ line col) = "line " ++ show line ++ ":" ++ show col
 mkL :: TokenClass -> AlexInput -> Int -> Alex Token
 mkL c (p, _, _, str) len = let t = take len str
   in case c of 
-    LFileIni -> return $ newCode (tail t) p True
-    LCodeIni -> return $ newCode (tail t) p False
-    LCodeEnd -> return $ CodeEnd (trim t) p
-    LInclude -> return $ Include t p
-    LExecCmd -> return $ ExecCmd (trimExec t) p
-    LContent -> return $ Content t p
-    LSkip    -> return $ Content (tail t) p
+    LFileIni -> return $! newCode (tail t) p True
+    LCodeIni -> return $! newCode (tail t) p False
+    LCodeEnd -> return $! CodeEnd (trim t) p
+    LInclude -> return $! Include t p
+    LExecCmd -> return $! ExecCmd (trimExec t) p
+    LContent -> return $! Content t p
+    LSkip    -> return $! Content (tail t) p
 
 newCode :: String -> AlexPosn -> Bool -> Token
 newCode s p t = CodeIni s p (trim (tailN s 3)) t

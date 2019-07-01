@@ -12,9 +12,7 @@ viewToken (ExecCmd a _) = return $! "@exec " ++ a
 viewToken x             = return $! tokStr x
 
 viewStmt' :: [Token] -> IO String
-viewStmt' []     = return []
---viewStmt' [x]    = viewToken x
-viewStmt' (x:xs) = addM (viewToken x) (viewStmt' xs)
+viewStmt' = foldr (addM . viewToken) (return [])
 
 viewStmt :: [Snippet] -> [Token] -> MdrString
 viewStmt s x

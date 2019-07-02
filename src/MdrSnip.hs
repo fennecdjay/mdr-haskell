@@ -53,12 +53,17 @@ findSnipk' ((a, b):xs) y
   | isInclude a y = Right b
   | otherwise = findSnipk' xs y
 
+skipFirstLine :: String -> String
+skipFirstLine (x:xs)
+  | x == '\n' = xs
+  | otherwise = skipFirstLine xs
+
 doExpand :: Snip -> Token -> MdrString
 doExpand k x =
   case b of
     Right nk ->
       case findSnipk' (knowResult nk) (tokStr x) of
-        Right a -> Right a
+        Right a -> Right $ fmap skipFirstLine a
         Left e  -> Left $ tokErr x e
     Left e -> Left e
   where

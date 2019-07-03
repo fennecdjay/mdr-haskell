@@ -63,7 +63,8 @@ doExpand k x =
   case b of
     Right nk ->
       case findSnipk' (knowResult nk) (tokStr x) of
-        Right a -> Right $ fmap skipFirstLine a
+--        Right a -> Right $ fmap skipFirstLine a
+        Right a -> Right a
         Left e  -> Left $ tokErr x e
     Left e -> Left e
   where

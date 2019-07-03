@@ -1,3 +1,9 @@
+<<<<<<< HEAD:tests/README.mdr
+=======
+> Please use the Haskell branch!
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/fennecdjay/mdr.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/fennecdjay/mdr/context:cpp)
+[![Coverage Status](https://coveralls.io/repos/github/fennecdjay/mdr/badge.svg)](https://coveralls.io/github/fennecdjay/mdr)
+>>>>>>> 0dce01a98b5fece3dc88022791bf43bcef9ee3e4:README.mdr
 # MDR, a markdown runner
 
 mdr is a **small** (less than **500 C SLOC** :champagne:) *program* and *markup*

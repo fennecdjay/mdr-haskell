@@ -1,6 +1,6 @@
 # MDR, a markdown runner
 
-mdr is a **small** (less than **500 C SLOC** :champagne:) *program* and *markup*
+mdr is a **small** (less than **500 Haskell SLOC** :champagne:) *program* and *markup*
 designed to facilitate documentation and testing.  
 
 I started it to ease [Gwion](https://github.com/fennecdjay/gwion)'s devellopment,

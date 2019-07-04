@@ -1,5 +1,7 @@
 # MDR, a markdown runner
 
+[![Build Status](https://travis-ci.org/fennecdjay/mdr.svg?branch=master)](https://travis-ci.org/fennecdjay/mdr)
+
 mdr is a **small** (less than **500 Haskell SLOC** :champagne:) *program* and *markup*
 designed to facilitate documentation and testing.  
 

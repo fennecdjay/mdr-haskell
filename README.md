@@ -43,7 +43,13 @@ Yes, there should be no output, and that good news.
 ### Test
 
 Then we run it
+```
+./hello_world
+```
+
+```
 Hello, World!
+```
 
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
@@ -60,7 +66,14 @@ That's the content of the source file we generated (and compiled).
 
 ### More test
 Let's try it
+```
+[ "$(./hello_world)" = "Hello, World!" ] && echo "OK" || echo "NOT_OK"
+```
+
+and the result is
+```
 OK
+```
 
 ## Building
 ``` sh

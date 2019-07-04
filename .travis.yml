@@ -2,7 +2,8 @@ language: haskell
 
 install:
   - cabal install alex happy #hpc-coveralls
-  - git clone https://github.com/guillaume-nargeot/hpc-coveralls; cd hpc-coveralls; cabal install
+#  - git clone https://github.com/guillaume-nargeot/hpc-coveralls; cd hpc-coveralls; cabal install
+
 #deploy:
 #  provider: hackage
 #  username: fennecdjay
@@ -15,5 +16,5 @@ script:
   - cabal configure --enable-tests --enable-coverage && cabal build
   - cabal test
 
-after_script:
-  - hpc-coveralls tests
+#after_script:
+#  - hpc-coveralls tests

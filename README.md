@@ -11,6 +11,7 @@ Let' walktrough... :smile:
 let's write our first litterate progam.
 
 ### Define program structure
+
 ``` hello_world.c .c
 @[[Includes]]
 
@@ -29,6 +30,7 @@ As we need the *puts* function, we need **stdio** headers.
 
 
 ### Print function
+
 ``` Print .c
 puts("Hello, World!");
 ```
@@ -37,9 +39,37 @@ puts("Hello, World!");
 
 ### Compile
 with this line 
-
+```
+@exec cc hello_world.c -o hello_world
+```
 we compile *hello_world.c*.  
+
+```
+```
+
 Yes, there should be no output, and that good news.
+
+
+
+### Check
+Let's look at hello_world.c
+
+```
+@exec cat hello_world.c
+```
+
+```
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+  puts("Hello, World!");
+}
+```
+
+That's the content of the source file we generated (and compiled).
+
+
+
 ### Test
 
 Then we run it
@@ -54,17 +84,6 @@ Hello, World!
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
-### Check
-Let's look at hello_world.c
-```
-#include <stdio.h>
-
-int main(int argc, char** argv) {
-  puts("Hello, World!");
-}
-```
-That's the content of the source file we generated (and compiled).
-
 ### More test
 Let's try it
 ```
@@ -77,8 +96,20 @@ OK
 ```  
 
 ## Building
+
+As a haskell programm, it seemed natural to use [cabal](https://www.haskell.org/cabal/)
+as a build system.
+
 ``` sh
-make
+cabal build
+```  
+
+## Installing
+
+As easy as before, just type.
+
+``` sh
+cabal install
 ```  
 
 generated from [this file](https://github.com/fennecdjay/mdr/blob/master/README.mdr)

@@ -46,31 +46,32 @@ Yes, there should be no output, and that good news.
 Then we run it
 ```
 ./hello_world
-```
+```  
 
 ```
 @exec ./hello_world
-```
+```  
 
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
 Let's look at hello_world.c
-@exec cat hello_world.c  
-
+```
+@exec cat hello_world.c
+```
 That's the content of the source file we generated (and compiled).
 
 ### More test
 Let's try it
 ```
 [ "$(./hello_world)" = "Hello, World!" ] && echo "OK" || echo "NOT_OK"
-```
+```  
 
 and the result is
 ```
 @exec [ "$(./hello_world)" = "Hello, World!" ] && echo "OK" || echo "NOT_OK"
-```
+```  
 
 ## Building
 ``` sh

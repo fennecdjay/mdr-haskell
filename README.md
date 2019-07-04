@@ -45,35 +45,36 @@ Yes, there should be no output, and that good news.
 Then we run it
 ```
 ./hello_world
-```
+```  
 
 ```
 Hello, World!
-```
+```  
 
 Do we read *Hello World!* ?  
 Assuming yes, let's continue.
 
 ### Check
 Let's look at hello_world.c
+```
 #include <stdio.h>
 
 int main(int argc, char** argv) {
   puts("Hello, World!");
 }
-
+```
 That's the content of the source file we generated (and compiled).
 
 ### More test
 Let's try it
 ```
 [ "$(./hello_world)" = "Hello, World!" ] && echo "OK" || echo "NOT_OK"
-```
+```  
 
 and the result is
 ```
 OK
-```
+```  
 
 ## Building
 ``` sh

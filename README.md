@@ -11,9 +11,9 @@ Let' walktrough... :smile:
 ## Hello World
 let's write our first litterate progam.
 
-## Define program structure
+### Define program structure
 
-``` .c
+``` c
 @[[Includes]]
 
 int main(int argc, char** argv) {
@@ -25,14 +25,14 @@ int main(int argc, char** argv) {
 ### Add Headers
 As we need the *puts* function, we need **stdio** headers.
 
-``` .c
+``` c
 #include <stdio.h>
 ```
 
 
 ### Print function
 
-``` .c
+``` c
 puts("Hello, World!");
 ```
 
@@ -40,12 +40,12 @@ puts("Hello, World!");
 
 ### Compile
 with this line
-```
+``` sh
 @exec cc hello_world.c -o hello_world
 ```
 we compile *hello_world.c*.
 
-```
+``` sh
 ```
 
 Yes, there should be no output, and that good news.
@@ -55,11 +55,11 @@ Yes, there should be no output, and that good news.
 ### Check
 Let's look at hello_world.c
 
-```
+``` sh
 @exec cat hello_world.c
 ```
 
-```
+``` c
 #include <stdio.h>
 
 int main(int argc, char** argv) {
@@ -74,11 +74,11 @@ That's the content of the source file we generated (and compiled).
 ### Test
 
 Then we run it
-```
+``` sh
 ./hello_world
 ```
 
-```
+``` sh
 Hello, World!
 ```
 
@@ -92,7 +92,7 @@ Let's try it
 ```
 
 and the result is
-```
+``` sh
 OK
 ```
 

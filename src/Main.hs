@@ -63,5 +63,7 @@ handleArgs []     = runFromStdIn
 handleArgs [arg]  = handleArg arg
 handleArgs (x:xs) = handleArg x >> handleArgs xs
 
+-- | the main function
+-- just get arguments and use them.
 main :: IO ()
 main = getArgs >>= handleArgs

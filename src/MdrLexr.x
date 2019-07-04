@@ -77,7 +77,7 @@ mkL c (p, _, _, str) len = let t = take len str
 -- | skip from last dot
 getFileExt :: String -> String-> String
 getFileExt str sum
-  | last str == '.' = "``` ." ++ sum ++ "\n"
+  | last str == '.' = "``` " ++ sum ++ "\n"
   | otherwise = getFileExt (init str) (last str : sum)
 
 newCode :: String -> AlexPosn -> Bool -> Token

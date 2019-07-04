@@ -2,7 +2,8 @@ language: haskell
 
 install:
   - cabal install alex happy
-  - git clone https://github.com/guillaume-nargeot/hpc-coveralls; cd hpc-coveralls; cabal install
+  - git clone https://github.com/guillaume-nargeot/hpc-coveralls; cd hpc-coveralls; cabal build; cabal install;
+  - ls ~/.cabal/bin
   - hpc-coveralls
 
 #deploy:

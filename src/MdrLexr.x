@@ -74,8 +74,14 @@ mkL c (p, _, _, str) len = let t = take len str
     LContent -> return $! Content t p
     LSkip    -> return $! Content (tail t) p
 
+-- | skip from last dot
+getFileExt :: String -> String-> String
+getFileExt str sum
+  | last str == '.' = "``` ." ++ sum ++ "\n"
+  | otherwise = getFileExt (init str) (last str : sum)
+
 newCode :: String -> AlexPosn -> Bool -> Token
-newCode s p t = CodeIni s p (trim (tailN s 3)) t
+newCode s p t = CodeIni (getFileExt (init s) []) p (trim (tailN s 3)) t
 
 trimXXX :: (String -> String) -> (String -> Char) -> Char -> (Char -> Char -> Bool) -> String -> String
 trimXXX f1 f2 c op s

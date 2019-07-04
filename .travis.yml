@@ -1,10 +1,17 @@
 language: haskell
 install: cabal install alex happy
-deploy:
-  provider: hackage
-  username: fennecdjay
-  password:
-    secure: f2BMmXoyMwGHnV4K7RU+VFH++eiq8FlWAc9Zh4Gr+FnOj9KBLTCAErn7qCfNqQY7qleCRezlhtpX3UacXQObWVoOZktoAB7xk2gyp00rBjn6HpI2rcrTDBT7F6Qf3YheR21wjNfzgolhGkwyDGTB+WZu9FEa+M10ZVTTaorMZNB/32YZAcSyflefwyqaqh4hGU2ieqFc1h66ZpgRScSZcnDX64KSphX//ubBdkhJxIXdtYKGB5r1JxyBV3g2fHBfVzOaLr1Qp3ESKcjbN55H9ERcc1fgZ6dN9fMOJnhyIgUh+aTSntc9Vw3HC8uWkJCvkEpiJGPZatVM0k/JAQbmWi9G8w86S+4l0OVGPtshLPbkX/L9/AOdPxRFZZeWZaCT7Fy0lbfJnRaFDOVk2nLLrqSmM4ixKXwOslfr1eb6oPvJFN0xKGVHShIU8v4h6Qt038HZE3xgXWLGF5+Co/MFS3+j/gIO+IMWu6WohtSeKUB0r+ntvx2ZGwsnDUgu5HtI1W4ga6PQweCvSsHtOGFLb6Yu/kb0Hu4XHG/uUHjQAr6YvdyqVMnMc4fTvTcdOAIMvuGk1D3jsVKgGtJCKHDzc2aPsiz/OUdJfTIAoZCEC/dHdpj9skeKT93Nlnb5OFvy1X4Iom2eThN7efavpjiZqMgcu2cY9uMhKvb3ZlRHEbY=
-  on:
-    repo: fennecdjay/mdr
-    branch: haskell
+#deploy:
+#  provider: hackage
+#  username: fennecdjay
+#  password:
+#    secure: f2BMmXoyMwGHnV4K7RU+VFH++eiq8FlWAc9Zh4Gr+FnOj9KBLTCAErn7qCfNqQY7qleCRezlhtpX3UacXQObWVoOZktoAB7xk2gyp00rBjn6HpI2rcrTDBT7F6Qf3YheR21wjNfzgolhGkwyDGTB+WZu9FEa+M10ZVTTaorMZNB/32YZAcSyflefwyqaqh4hGU2ieqFc1h66ZpgRScSZcnDX64KSphX//ubBdkhJxIXdtYKGB5r1JxyBV3g2fHBfVzOaLr1Qp3ESKcjbN55H9ERcc1fgZ6dN9fMOJnhyIgUh+aTSntc9Vw3HC8uWkJCvkEpiJGPZatVM0k/JAQbmWi9G8w86S+4l0OVGPtshLPbkX/L9/AOdPxRFZZeWZaCT7Fy0lbfJnRaFDOVk2nLLrqSmM4ixKXwOslfr1eb6oPvJFN0xKGVHShIU8v4h6Qt038HZE3xgXWLGF5+Co/MFS3+j/gIO+IMWu6WohtSeKUB0r+ntvx2ZGwsnDUgu5HtI1W4ga6PQweCvSsHtOGFLb6Yu/kb0Hu4XHG/uUHjQAr6YvdyqVMnMc4fTvTcdOAIMvuGk1D3jsVKgGtJCKHDzc2aPsiz/OUdJfTIAoZCEC/dHdpj9skeKT93Nlnb5OFvy1X4Iom2eThN7efavpjiZqMgcu2cY9uMhKvb3ZlRHEbY=
+#  on:
+#    repo: fennecdjay/mdr
+#    branch: master
+before_install:
+  - cabal install hpc-coveralls
+script:
+  - cabal configure --enable-tests --enable-library-coverage && cabal build
+  - run-cabal-test test
+after_script:
+  - hpc-coveralls test

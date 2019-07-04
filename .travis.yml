@@ -10,6 +10,6 @@ install: cabal install alex happy hpc-coveralls
 #    branch: master
 script:
   - cabal configure --enable-tests --enable-library-coverage && cabal build
-  - cabal-test test
+  - cabal test
 after_script:
   - hpc-coveralls test

@@ -6,7 +6,7 @@ mdr is a **small** (less than **500 Haskell SLOC** :champagne:) *program* and *m
 designed to facilitate documentation and testing.  
 
 
-![logo](https://github.com/fennecdjay/mdr/blob/master/logoreadme.png "The Mdr logo! (WIP)")
+![logo](logoreadme.png "The Mdr logo! (WIP)")
 
 I started it to ease [Gwion](https://github.com/fennecdjay/gwion)'s devellopment,
 but it is not tied in any way to this project.  

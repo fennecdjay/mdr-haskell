@@ -1,6 +1,8 @@
 language: haskell
 
-install: cabal install alex happy hpc-coveralls
+install:
+  - cabal install alex happy #hpc-coveralls
+  - git clone https://github.com/guillaume-nargeot/hpc-coveralls; cd hpc-coveralls; cabal install
 #deploy:
 #  provider: hackage
 #  username: fennecdjay

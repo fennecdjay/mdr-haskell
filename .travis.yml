@@ -22,4 +22,4 @@ script:
   - cabal test
 
 after_script:
-  - hpc-coveralls test Main MdrCode MdrLexr MdrPars MdrSnip MdrUtil MdrView
+  - hpc-coveralls test mdr-0.0.1.0

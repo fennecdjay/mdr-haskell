@@ -23,5 +23,6 @@ script:
 
 after_script:
 # must match the version for now ;-(
+  - mkdir -p p dist/hpc/vanilla/tix/mdr
   - cp dist/hpc/vanilla/tix/mdr-0.0.1.0/mdr-0.0.1.0.tix dist/hpc/vanilla/tix/mdr/mdr.tix
   - hpc-coveralls test mdr

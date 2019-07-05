@@ -22,4 +22,6 @@ script:
   - cabal test
 
 after_script:
-  - hpc-coveralls test mdr-0.0.1.0
+# must match the version for now ;-(
+  - cp dist/hpc/vanilla/tix/mdr-0.0.1.0/mdr-0.0.1.0.tix dist/hpc/vanilla/tix/mdr/mdr.tix
+  - hpc-coveralls test mdr

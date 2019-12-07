@@ -21,5 +21,6 @@ jobs:
       run: |
         cabal configure --enable-tests
         cabal build
+        cabal install
     - name: Run tests
       run: cabal test

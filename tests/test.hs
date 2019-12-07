@@ -3,7 +3,7 @@ import System.Process (system)
 
 --build = "./dist/build/mdr/"
 --cmd = build ++ "mdr "
-cmd = "mdr "
+cmd = "~/.cabal/bin/mdr "
 
 main = do
     -- This dies with a pattern match failure if the shell command fails

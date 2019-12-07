@@ -22,5 +22,7 @@ jobs:
         cabal configure --enable-tests
         cabal build
         cabal install
+    - name: check
+      run: ls ~/.cabal/bin
     - name: Run tests
       run: cabal test

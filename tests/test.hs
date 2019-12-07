@@ -1,8 +1,9 @@
 import System.Exit (ExitCode(ExitSuccess))
 import System.Process (system)
 
-build = "./dist/build/mdr/"
-cmd = build ++ "mdr "
+--build = "./dist/build/mdr/"
+--cmd = build ++ "mdr "
+cmd = "mdr "
 
 main = do
     -- This dies with a pattern match failure if the shell command fails
